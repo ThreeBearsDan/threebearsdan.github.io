@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="记录岁月。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一代人终将老去，总有人正年轻。">
-<meta property="og:url" content="http://threebearsdan.github.io/index.html">
+<meta name="description" content="objdump命令显示目标文件的信息 选项 1Usage: objdump &amp;lt;option(s)&amp;gt; &amp;lt;file(s)&amp;gt;  123456789101112131415-a --archive-headers显示静态库文件的头信息，包含组成静态库的目标文件&amp;gt; objdump -a test.a----------------In archive libtest.a:a.o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="objdump">
+<meta property="og:url" content="http://threebearsdan.github.io/2019/06/26/objdump/index.html">
 <meta property="og:site_name" content="一代人终将老去，总有人正年轻。">
-<meta property="og:description" content="记录岁月。">
+<meta property="og:description" content="objdump命令显示目标文件的信息 选项 1Usage: objdump &amp;lt;option(s)&amp;gt; &amp;lt;file(s)&amp;gt;  123456789101112131415-a --archive-headers显示静态库文件的头信息，包含组成静态库的目标文件&amp;gt; objdump -a test.a----------------In archive libtest.a:a.o">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-26T12:49:38.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一代人终将老去，总有人正年轻。">
-<meta name="twitter:description" content="记录岁月。">
+<meta name="twitter:title" content="objdump">
+<meta name="twitter:description" content="objdump命令显示目标文件的信息 选项 1Usage: objdump &amp;lt;option(s)&amp;gt; &amp;lt;file(s)&amp;gt;  123456789101112131415-a --archive-headers显示静态库文件的头信息，包含组成静态库的目标文件&amp;gt; objdump -a test.a----------------In archive libtest.a:a.o">
 
 
 
@@ -118,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://threebearsdan.github.io/">
+  <link rel="canonical" href="http://threebearsdan.github.io/2019/06/26/objdump/">
 
 
 
 
 
-  <title>一代人终将老去，总有人正年轻。</title>
+  <title>objdump | 一代人终将老去，总有人正年轻。</title>
   
 
 
@@ -143,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/26/objdump/" itemprop="url">objdump</a></h1>
+          <h1 class="post-title" itemprop="name headline">objdump</h1>
         
 
         <div class="post-meta">
@@ -301,9 +299,7 @@
       
 
       
-        
-          
-            <h2 id="objdump命令"><a href="#objdump命令" class="headerlink" title="objdump命令"></a>objdump命令</h2><p><strong>显示目标文件的信息</strong></p>
+        <h2 id="objdump命令"><a href="#objdump命令" class="headerlink" title="objdump命令"></a>objdump命令</h2><p><strong>显示目标文件的信息</strong></p>
 <p>选项</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Usage: objdump &lt;option(s)&gt; &lt;file(s)&gt;</span><br></pre></td></tr></table></figure>
 
@@ -344,8 +340,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-v</span><br><span class="line">--version</span><br><span class="line">显示程序的版本号</span><br><span class="line"></span><br><span class="line">&gt; objdump -v</span><br><span class="line">--------------------</span><br><span class="line">GNU objdump version 2.20.51.0.2-5.48.el6 20100205</span><br><span class="line">Copyright 2009 Free Software Foundation, Inc.</span><br><span class="line">This program is free software; you may redistribute it under the terms of</span><br><span class="line">the GNU General Public License version 3 or (at your option) any later version.</span><br><span class="line">This program has absolutely no warranty.</span><br><span class="line">---------------------</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">-i</span><br><span class="line">--info</span><br><span class="line">列出支持的目标格式和架构</span><br><span class="line"></span><br><span class="line">&gt; objdump -i</span><br><span class="line">---------------------</span><br><span class="line">BFD header file version version 2.20.51.0.2-5.48.el6 20100205</span><br><span class="line">elf32-i386</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  i386</span><br><span class="line">a.out-i386-linux</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  i386</span><br><span class="line">pei-i386</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  i386</span><br><span class="line">elf64-x86-64</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  i386</span><br><span class="line">elf64-l1om</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  l1om</span><br><span class="line">elf64-little</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">elf64-big</span><br><span class="line"> (header big endian, data big endian)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">elf32-little</span><br><span class="line"> (header little endian, data little endian)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">elf32-big</span><br><span class="line"> (header big endian, data big endian)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">srec</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">symbolsrec</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">verilog</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">tekhex</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">binary</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">ihex</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line">  i386</span><br><span class="line">  l1om</span><br><span class="line">trad-core</span><br><span class="line"> (header endianness unknown, data endianness unknown)</span><br><span class="line"></span><br><span class="line">               elf32-i386 a.out-i386-linux pei-i386 elf64-x86-64 elf64-l1om</span><br><span class="line">          i386 elf32-i386 a.out-i386-linux pei-i386 elf64-x86-64 ----------</span><br><span class="line">          l1om ---------- ---------------- -------- ------------ elf64-l1om</span><br><span class="line"></span><br><span class="line">               elf64-little elf64-big elf32-little elf32-big srec symbolsrec</span><br><span class="line">          i386 elf64-little elf64-big elf32-little elf32-big srec symbolsrec</span><br><span class="line">          l1om elf64-little elf64-big elf32-little elf32-big srec symbolsrec</span><br><span class="line"></span><br><span class="line">               verilog tekhex binary ihex trad-core</span><br><span class="line">          i386 verilog tekhex binary ihex ---------</span><br><span class="line">          l1om verilog tekhex binary ihex ---------</span><br><span class="line">---------------------</span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
     
@@ -362,139 +356,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/06/26/代码段和数据段为什么分开存放？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cruise">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/26/代码段和数据段为什么分开存放？/" itemprop="url">代码段和数据段为什么分开存放？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T16:43:51+08:00">
-                2019-06-26
-              </time>
+              <a href="/2019/06/26/代码段和数据段为什么分开存放？/" rel="next" title="代码段和数据段为什么分开存放？">
+                <i class="fa fa-chevron-left"></i> 代码段和数据段为什么分开存放？
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <ol>
-<li><p>当程序被装载后，数据和指令分别被映射到两个虚存区域。数据区域对进程来说是可读写的，而指令区域对进程来说是只读的，所以这两个虚存区域的权限可以被分别设置成可读写和只读。这样可以防止程序的指令被有意或无意的改写。</p>
-</li>
-<li><p>对于现代的CPU来说，它们有着极为强大的缓存体系。由于缓存在现代计算机中的地位非常重要，所以必须尽量提高缓存的命中率。指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被设计成数据缓存和指令缓存你分离，所以程序的指令和数据被分开存对CPU的缓存命中率提高有好处。</p>
-</li>
-<li><p>最重要的原因就是当系统中运行多个该程序的副本时，它们的指令都是一样的，所以内存中只需要保存一份改程序的指令部分。对于指令这种只读的区域来说时这样，对于其他的只读数据也一样，比如很多程序里面带有的图标，图片，文本等资源也是属于可共享的。当然每个副本进程的数据区域时不一样的。它们时进程私有的。不要小看这个共享指令的概念，它在现代操作系统里面占了极其重要的地位，特别时在有动态链接库的系统中，可以节省大量的内存。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -504,10 +387,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -515,6 +399,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -535,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -578,6 +475,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#objdump命令"><span class="nav-number">1.</span> <span class="nav-text">objdump命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -711,6 +624,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
