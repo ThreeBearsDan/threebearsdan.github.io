@@ -5,18 +5,19 @@
   
 
   
-  <title>一代人终将老去，总有人正年轻。</title>
+  <title>代码段和数据段为什么分开存放？ | 一代人终将老去，总有人正年轻。</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="记录岁月。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一代人终将老去，总有人正年轻。">
-<meta property="og:url" content="http://threebearsdan.github.io/index.html">
+  <meta name="description" content="当程序被装载后，数据和指令分别被映射到两个虚存区域。数据区域对进程来说是可读写的，而指令区域对进程来说是只读的，所以这两个虚存区域的权限可以被分别设置成可读写和只读。这样可以防止程序的指令被有意或无意的改写。  对于现代的CPU来说，它们有着极为强大的缓存体系。由于缓存在现代计算机中的地位非常重要，所以必须尽量提高缓存的命中率。指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码段和数据段为什么分开存放？">
+<meta property="og:url" content="http://threebearsdan.github.io/2019/06/26/代码段和数据段为什么分开存放？/index.html">
 <meta property="og:site_name" content="一代人终将老去，总有人正年轻。">
-<meta property="og:description" content="记录岁月。">
+<meta property="og:description" content="当程序被装载后，数据和指令分别被映射到两个虚存区域。数据区域对进程来说是可读写的，而指令区域对进程来说是只读的，所以这两个虚存区域的权限可以被分别设置成可读写和只读。这样可以防止程序的指令被有意或无意的改写。  对于现代的CPU来说，它们有着极为强大的缓存体系。由于缓存在现代计算机中的地位非常重要，所以必须尽量提高缓存的命中率。指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-06-26T09:01:23.396Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一代人终将老去，总有人正年轻。">
-<meta name="twitter:description" content="记录岁月。">
+<meta name="twitter:title" content="代码段和数据段为什么分开存放？">
+<meta name="twitter:description" content="当程序被装载后，数据和指令分别被映射到两个虚存区域。数据区域对进程来说是可读写的，而指令区域对进程来说是只读的，所以这两个虚存区域的权限可以被分别设置成可读写和只读。这样可以防止程序的指令被有意或无意的改写。  对于现代的CPU来说，它们有着极为强大的缓存体系。由于缓存在现代计算机中的地位非常重要，所以必须尽量提高缓存的命中率。指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被">
   
     <link rel="alternate" href="/atom.xml" title="一代人终将老去，总有人正年轻。" type="application/atom+xml">
   
@@ -63,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-代码段和数据段为什么分开存放？" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-代码段和数据段为什么分开存放？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/26/代码段和数据段为什么分开存放？/" class="article-date">
   <time datetime="2019-06-26T08:43:51.000Z" itemprop="datePublished">2019-06-26</time>
@@ -78,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/26/代码段和数据段为什么分开存放？/">代码段和数据段为什么分开存放？</a>
+    <h1 class="article-title" itemprop="name">
+      代码段和数据段为什么分开存放？
     </h1>
   
 
@@ -105,11 +104,9 @@
     </footer>
   </div>
   
-</article>
-
-
+    
   
-
+</article>
 
 </section>
         
