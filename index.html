@@ -232,6 +232,307 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/07/03/CGI-FastCGI-php-cgi-php-fpm的理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cruise">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/CGI-FastCGI-php-cgi-php-fpm的理解/" itemprop="url">CGI, FastCGI, php-cgi, php-fpm的理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T11:47:52+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="CGI"><a href="#CGI" class="headerlink" title="CGI"></a>CGI</h2><p>CGI是一种协议，CGI是一种协议，CGI是一种协议。</p>
+<p>定义了web服务和外部应用之间的交互方式。</p>
+<p>外部应用指不同语言编写的CGI脚本。</p>
+<p>CGI脚本用来生成动态的页面内容。</p>
+<p>CGI进程每次处理请求都要被初始化，处理完之后退出。</p>
+<h2 id="FastCGI"><a href="#FastCGI" class="headerlink" title="FastCGI"></a>FastCGI</h2><p>FastCGI是一种协议，FastCGI是一种协议，FastCGI是一种协议。</p>
+<p>是对CGI的一种改进。</p>
+<p>不需要每次请求处理完程序退出，下次请求来了可以直接复用该进程。</p>
+<h2 id="php-cgi"><a href="#php-cgi" class="headerlink" title="php-cgi"></a>php-cgi</h2><p>php-cgi解析cgi协议数据，调用php的php_execute_script函数来解析和运行php文件。</p>
+<h2 id="php-fpm"><a href="#php-fpm" class="headerlink" title="php-fpm"></a>php-fpm</h2><p>php-fpm是一个fastcgi进程管理器，类似于连接池，用于管理与web服务器的连接，而fastcgi协议的解析是通过php-fcgi进行解析的，之后将php文件交给php_execute_script函数来执行。</p>
+<p>参考：</p>
+<p><a href="https://www.basezap.com/difference-php-cgi-php-fpm/" target="_blank" rel="noopener">https://www.basezap.com/difference-php-cgi-php-fpm/</a></p>
+<p><a href="https://help.superhosting.bg/en/cgi-common-gateway-interface-fastcgi.html" target="_blank" rel="noopener">https://help.superhosting.bg/en/cgi-common-gateway-interface-fastcgi.html</a></p>
+<p><a href="https://www.zhihu.com/question/268732467" target="_blank" rel="noopener">https://www.zhihu.com/question/268732467</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/07/03/php基本语法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cruise">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/03/php基本语法/" itemprop="url">php基本语法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-03T10:14:41+08:00">
+                2019-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>php脚本以<code>&lt;?php&gt;</code>开始，以<code>&lt;?&gt;</code>结束，可以放在文档中的任何位置。</p>
+<ul>
+<li><a href="#variable">变量</a></li>
+<li><a href="#array">数组</a></li>
+<li><a href="#function">函数</a></li>
+<li><a href="#control">控制结构</a></li>
+<li><a href="#annotation">注释</a></li>
+</ul>
+<p><span id="variable"><h2>变量</h2></span></p>
+<p>规则：</p>
+<ul>
+<li>变量以$符号开始，后面跟着变量的名称</li>
+<li>变量名以不能以数字开头</li>
+<li>变量名只能包含数字，字母以及下划线</li>
+<li>变量名区分大小写</li>
+</ul>
+<p>定义变量a</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$a = 10;</span><br></pre></td></tr></table></figure>
+
+<p><span id="array"><h2>数组</h2></span></p>
+<p>创建数组<code>person</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 数值数组</span><br><span class="line">$person = array(&quot;student&quot;, &quot;doctor&quot;, &quot;worker&quot;);</span><br><span class="line"></span><br><span class="line">echo $person[0]</span><br><span class="line">echo $person[1]</span><br><span class="line">echo $person[2]</span><br><span class="line"></span><br><span class="line">// 关联数组</span><br><span class="line">$person = array(&quot;student&quot;=&gt;&quot;Cruise&quot;, &quot;doctor&quot;=&gt;&quot;Kobe&quot;, &quot;worker&quot;=&gt;&quot;James&quot;);</span><br><span class="line"></span><br><span class="line">echo $person[&quot;student&quot;];</span><br><span class="line"></span><br><span class="line">// 遍历关联数组</span><br><span class="line">foreach($person as $x=&gt;$x_value)</span><br><span class="line">&#123;</span><br><span class="line">  echo &quot;key=&quot; . %x . &quot;, value=&quot; . $x_value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><span id="function">函数</span></p>
+<p>定义函数<code>f</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f() </span><br><span class="line">&#123;</span><br><span class="line">    // code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>带参数的函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f($a)</span><br><span class="line">&#123;</span><br><span class="line">    echo $a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>带有返回值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f($a, $b)</span><br><span class="line">&#123;</span><br><span class="line">    return $a + $b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><span id="control"><h2>控制结构</h2></span><br>For循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for ($i = 1; $i &lt;= 5; $i++)</span><br><span class="line">&#123;</span><br><span class="line">  echo &quot;The number is &quot; . $i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foreach ($x as $value) </span><br><span class="line">&#123;</span><br><span class="line">  echo $value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>While循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while ($i &lt;= 5)</span><br><span class="line">&#123;</span><br><span class="line">  echo $i;</span><br><span class="line">  $i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Do while语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">do</span><br><span class="line">&#123;</span><br><span class="line">  echo $i;</span><br><span class="line">  $i++;</span><br><span class="line">&#125; while ($i &lt; 5)</span><br></pre></td></tr></table></figure>
+
+<p>If语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if ($t &lt; 20)</span><br><span class="line">&#123;</span><br><span class="line">  echo &quot;Have a good day&quot;;</span><br><span class="line">&#125; elseif &#123;</span><br><span class="line">  echo &quot;Have a bad day&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  echo &quot;Boom&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Switch语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">switch ($n) </span><br><span class="line">&#123;</span><br><span class="line">case &quot;red&quot;:</span><br><span class="line">    echo &quot;red&quot;;</span><br><span class="line">    break;</span><br><span class="line">case &quot;blue&quot;:</span><br><span class="line">    echo &quot;blue&quot;;</span><br><span class="line">    break;</span><br><span class="line">default:</span><br><span class="line">    echo &quot;default&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><span id="annotation"><h2>注释</h2></span><br>行注释：<code>//</code>, <code>#</code><br>块注释：<code>/* */</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/06/28/链接的接口——符号/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -941,7 +1242,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
