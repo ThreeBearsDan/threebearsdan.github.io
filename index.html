@@ -311,7 +311,8 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">request = requests.Session()</span><br><span class="line"></span><br><span class="line"># retrive Cookie from driver</span><br><span class="line">cookies = driver.get_cookies()</span><br><span class="line"></span><br><span class="line">for cookie in cookies:</span><br><span class="line">    request.cookies.set(cookie[&apos;name&apos;], cookie[&apos;value&apos;])</span><br><span class="line"></span><br><span class="line">request.get(&apos;http://www.xxx.com/api/xxx&apos;)</span><br></pre></td></tr></table></figure>
 
 <p>上面代码发送的请求中就会携带之前登录获取到的<code>Cookie</code>信息，这样就可以跳过被爬站点的认证，直接访问<code>api</code>。</p>
-<p>Reference</p>
+<p>Reference:</p>
+<p><a href="https://zhuanlan.zhihu.com/p/28587931" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/28587931</a></p>
 
           
         
