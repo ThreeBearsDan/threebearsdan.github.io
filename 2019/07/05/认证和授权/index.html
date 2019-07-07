@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="记录岁月。">
+<meta name="description" content="认证的目的是问了认出用户是谁。 授权的目的是为了决定用户能够做什么。  认证实际上就是验证凭证的过程。凭证可以是钥匙、指纹、虹膜等。 如果只有一个凭证被用于认证，则称为单因素认证。 如果有两个或多个凭证被用于认证，则称为双因素(Two Factors)认证或多因素认证。 多因素认证的安全强度要高于单因素认证，但是在用户体验上，多因素认证会带来一些不方便的地方。 密码作为一种凭证，在存储时也需要注">
 <meta property="og:type" content="article">
 <meta property="og:title" content="认证和授权">
 <meta property="og:url" content="http://threebearsdan.github.io/2019/07/05/认证和授权/index.html">
 <meta property="og:site_name" content="一代人终将老去，总有人正年轻。">
-<meta property="og:description" content="记录岁月。">
+<meta property="og:description" content="认证的目的是问了认出用户是谁。 授权的目的是为了决定用户能够做什么。  认证实际上就是验证凭证的过程。凭证可以是钥匙、指纹、虹膜等。 如果只有一个凭证被用于认证，则称为单因素认证。 如果有两个或多个凭证被用于认证，则称为双因素(Two Factors)认证或多因素认证。 多因素认证的安全强度要高于单因素认证，但是在用户体验上，多因素认证会带来一些不方便的地方。 密码作为一种凭证，在存储时也需要注">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-05T05:36:01.975Z">
+<meta property="og:updated_time" content="2019-07-07T09:06:24.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认证和授权">
-<meta name="twitter:description" content="记录岁月。">
+<meta name="twitter:description" content="认证的目的是问了认出用户是谁。 授权的目的是为了决定用户能够做什么。  认证实际上就是验证凭证的过程。凭证可以是钥匙、指纹、虹膜等。 如果只有一个凭证被用于认证，则称为单因素认证。 如果有两个或多个凭证被用于认证，则称为双因素(Two Factors)认证或多因素认证。 多因素认证的安全强度要高于单因素认证，但是在用户体验上，多因素认证会带来一些不方便的地方。 密码作为一种凭证，在存储时也需要注">
 
 
 
@@ -299,7 +299,29 @@
       
 
       
-        
+        <ul>
+<li>认证的目的是问了认出用户是谁。</li>
+<li>授权的目的是为了决定用户能够做什么。</li>
+</ul>
+<p>认证实际上就是验证凭证的过程。凭证可以是钥匙、指纹、虹膜等。</p>
+<p>如果只有一个凭证被用于认证，则称为<code>单因素认证</code>。</p>
+<p>如果有两个或多个凭证被用于认证，则称为<code>双因素(Two Factors)认证</code>或<code>多因素认证</code>。</p>
+<p>多因素认证的安全强度要高于单因素认证，但是在用户体验上，多因素认证会带来一些不方便的地方。</p>
+<p>密码作为一种凭证，在存储时也需要注意一些问题。一般来说，密码必须以不可逆的加密算法，或者是单项散列函数算法，加密后存储到数据库中。这样做是为了尽最大可能地保证密码的私密性，即使是网站的管理人员，也不能够看到用户的密码。在这种情况下，黑客即使入侵了网站，导出数据库中的数据，也无法获取到密码的明文。</p>
+<p>目前黑客们广泛使用的一种MD5加密的密码的方法是<code>彩虹表</code>。</p>
+<p><code>彩虹表</code>的思路是收集尽可能多的密码明文和明文对应的MD5值。这样只需要查询MD5值，就能够找到该MD5值对应的明文。一个好的<code>彩虹表</code>，可能会非常庞大，但这种方法确实有效。</p>
+<p>为了避免密码哈希值泄露后，黑客能直接通过<code>彩虹表</code>查询出密码的明文，在计算密码明文的哈希值时，增加一个<code>salt</code>。<code>salt</code>是一个字符串，它的作用时为了增加明文的复杂度，并能使彩虹表一类的攻击失效。</p>
+<p><code>salt</code>的使用：MD5(username+passwd+salt)</p>
+<p><code>salt</code>应该保存在服务器端的配置文件中，并妥善保管。</p>
+<h3 id="Session与认证"><a href="#Session与认证" class="headerlink" title="Session与认证"></a>Session与认证</h3><p>密码与证书等认证手段，一般仅仅用于登录（Login）的过程。当登录完成后，用户访问网站页面，不能每次浏览器请求页面时都在使用密码认证一次。因此，当认证成功以后，需要替换一个对用户透明的凭证。这个凭证就是sessionID。</p>
+<p>当用户登录完成后，在服务器端就会创建一个新的会话（Session），会话中会保存用户状态和相关信息。服务器端维护所有在线用户的Session，此时的认证，只需要知道是哪个用户在浏览当前页面即可。为了告诉服务器应该使用哪一个Session，浏览器需要把当前用户的Session ID告知服务器。</p>
+<p>最常见的做法就是把sessionID加密后保存在Cookie中，因为Cookie会随着HTTP请求发送，且收到浏览器通源策略的保护。</p>
+<p>Session一旦在生命周期内被劫持，就等同于账户失窃。同时由于SessionID是用户登录后才持有的认证凭证，因此黑客不需要再攻击登录过程（比如密码），在设计安全方案时需要意识到这单。</p>
+<p>Session劫持就是一种通过窃取用户SessionID后，使用该SessionID登录进目标账户的攻击方法，此时攻击者实际上是使用了目标账户的有效Session。如果SessionID是保存在Cookie中的，则这种攻击可以称为Cookie劫持。</p>
+<p>Cookie泄漏的方式有多种，最常见的有XSS攻击、网络Sniff，以及本地木马窃取，对于同构XSS漏洞窃取Cookie的攻击，通过给Cookie标记httponly，可以有效缓解XSS窃取Cookie的问题。但是其他泄露途径，比如网络嗅探或者Cookie文件失窃，则会涉及到客户端的环境安全，需要从用户客户端着手解决。</p>
+<p>SessionID除了可以保存在Cookie中外，还可以保存在URL中，作为请求的一个参数，但是这种方式的安全性是难以经受考验的。</p>
+<p>在生成SessionID时，需要保证足够的随机性，比如采用足够强的伪随机数生成算法。现在的网站开发中，都有很多成熟的开发框架可以使用。这些成熟的开发框架一般都会提供Cookie管理、Session管理的函数，可以善用这些函数和功能。</p>
+
       
     </div>
     
@@ -383,8 +405,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -426,6 +457,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session与认证"><span class="nav-number">1.</span> <span class="nav-text">Session与认证</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
