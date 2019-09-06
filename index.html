@@ -232,6 +232,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/09/05/scrapy之爬虫暂停与恢复/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cruise">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/05/scrapy之爬虫暂停与恢复/" itemprop="url">scrapy之爬虫暂停与恢复</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-05T22:46:35+08:00">
+                2019-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于爬虫而言，如果能够设置断点，停止后恢复运行可以继续从上次中断的点开始运行，无疑是一个友好的特性，实现原理无非是将中断信息持久化，scrapy是实现这个这个特性的，然鹅在这里踩坑了。</p>
+<p><a href="https://docs.scrapy.org/en/latest/topics/jobs.html" target="_blank" rel="noopener">Scrapy: Jobs pausing and resuming crawls</a></p>
+<p>参考文档戳上面</p>
+<p>按照文档中的操作，只需要在<code>scrapy crawl spider_name -s JOBDIR=job_dir/xxx</code>后面加上设置JOBDIR变量的参数即可，然后发送一个停止的信号即可。</p>
+<p>可是遇到了这样的问题，在发送完一次停止信号之后，程序没停，然后又发送了一次，程序强制被停，重启之后显示如下</p>
+<figure class="highlight plain"><figcaption><span>23:00:22 [scrapy.core.engine] INFO: Spider opened</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-09-05 23:00:22 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)</span><br><span class="line">2019-09-05 23:00:22 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023</span><br><span class="line">2019-09-05 23:00:22 [scrapy.dupefilters] DEBUG: Filtered duplicate request: &lt;GET https://www.privateproperty.com.ng/property-for-sale?sortby=listeddesc&gt; (referer: None)</span><br><span class="line">2019-09-05 23:00:22 [scrapy.core.engine] INFO: Closing spider (finished)</span><br></pre></td></tr></table></figure>
+
+<p>显示了一个filtered duplicate request之后就停止退出了，什么鬼？然后在搜索相关的问题，发现给出的都不是想要的答案，最后在stackoverflow上发现得分很低的答案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If you click Ctrl+C twice (force stop) it won&apos;t be able to be continued. Click Ctrl+C just once and wait.</span><br></pre></td></tr></table></figure>
+
+<p>试着做了，果然发送一个信号后等程序停止了重新恢复后就可以继续运行。</p>
+<p>上面说原理也就是保存断点的信息，对比一下强退和等待退出的目录结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">等待退出</span><br><span class="line">|____requests.queue</span><br><span class="line">| |____active.json</span><br><span class="line">| |____p0</span><br><span class="line">|____requests.seen</span><br><span class="line">|____spider.state</span><br><span class="line"></span><br><span class="line">强制退出</span><br><span class="line">.</span><br><span class="line">|____requests.queue</span><br><span class="line">| |____p0</span><br><span class="line">|____requests.seen</span><br><span class="line">|____spider.state</span><br></pre></td></tr></table></figure>
+
+<p>可见在目录结构上是有差异的。至于根本原因，需要阅读源码之后再给出答案，后续更新。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/07/07/python模拟登录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1512,7 +1646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

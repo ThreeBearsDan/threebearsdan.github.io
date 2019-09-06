@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="链接的本质就是将多个目标文件拼接到一起形成可执行文件。为了使不同的目标文件之间能够拼接，必须有一定的规则才行，就像协议一样。在链接中，目标文件之前的相互拼接实际上是目标文件之间对地址的引用，即对函数和变量的地址的引用。比如目标文件B用到了目标文件A中的函数foo，就称目标文件A定义了函数foo，目标文件B引用了目标文件A中的函数foo。在链接中，我们将函数和变量统称为符号，函数名或变量名就是符号名">
+<meta name="description" content="对于爬虫而言，如果能够设置断点，停止后恢复运行可以继续从上次中断的点开始运行，无疑是一个友好的特性，实现原理无非是将中断信息持久化，scrapy是实现这个这个特性的，然鹅在这里踩坑了。 Scrapy: Jobs pausing and resuming crawls 参考文档戳上面 按照文档中的操作，只需要在scrapy crawl spider_name -s JOBDIR=job_dir/xx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="链接的接口——符号">
-<meta property="og:url" content="http://threebearsdan.github.io/2019/06/28/链接的接口——符号/index.html">
+<meta property="og:title" content="scrapy之爬虫暂停与恢复">
+<meta property="og:url" content="http://threebearsdan.github.io/2019/09/05/scrapy之爬虫暂停与恢复/index.html">
 <meta property="og:site_name" content="一代人终将老去，总有人正年轻。">
-<meta property="og:description" content="链接的本质就是将多个目标文件拼接到一起形成可执行文件。为了使不同的目标文件之间能够拼接，必须有一定的规则才行，就像协议一样。在链接中，目标文件之前的相互拼接实际上是目标文件之间对地址的引用，即对函数和变量的地址的引用。比如目标文件B用到了目标文件A中的函数foo，就称目标文件A定义了函数foo，目标文件B引用了目标文件A中的函数foo。在链接中，我们将函数和变量统称为符号，函数名或变量名就是符号名">
+<meta property="og:description" content="对于爬虫而言，如果能够设置断点，停止后恢复运行可以继续从上次中断的点开始运行，无疑是一个友好的特性，实现原理无非是将中断信息持久化，scrapy是实现这个这个特性的，然鹅在这里踩坑了。 Scrapy: Jobs pausing and resuming crawls 参考文档戳上面 按照文档中的操作，只需要在scrapy crawl spider_name -s JOBDIR=job_dir/xx">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-28T11:28:32.742Z">
+<meta property="og:updated_time" content="2019-09-06T03:06:14.944Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="链接的接口——符号">
-<meta name="twitter:description" content="链接的本质就是将多个目标文件拼接到一起形成可执行文件。为了使不同的目标文件之间能够拼接，必须有一定的规则才行，就像协议一样。在链接中，目标文件之前的相互拼接实际上是目标文件之间对地址的引用，即对函数和变量的地址的引用。比如目标文件B用到了目标文件A中的函数foo，就称目标文件A定义了函数foo，目标文件B引用了目标文件A中的函数foo。在链接中，我们将函数和变量统称为符号，函数名或变量名就是符号名">
+<meta name="twitter:title" content="scrapy之爬虫暂停与恢复">
+<meta name="twitter:description" content="对于爬虫而言，如果能够设置断点，停止后恢复运行可以继续从上次中断的点开始运行，无疑是一个友好的特性，实现原理无非是将中断信息持久化，scrapy是实现这个这个特性的，然鹅在这里踩坑了。 Scrapy: Jobs pausing and resuming crawls 参考文档戳上面 按照文档中的操作，只需要在scrapy crawl spider_name -s JOBDIR=job_dir/xx">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://threebearsdan.github.io/2019/06/28/链接的接口——符号/">
+  <link rel="canonical" href="http://threebearsdan.github.io/2019/09/05/scrapy之爬虫暂停与恢复/">
 
 
 
 
 
-  <title>链接的接口——符号 | 一代人终将老去，总有人正年轻。</title>
+  <title>scrapy之爬虫暂停与恢复 | 一代人终将老去，总有人正年轻。</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/06/28/链接的接口——符号/">
+    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/09/05/scrapy之爬虫暂停与恢复/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Cruise">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">链接的接口——符号</h1>
+          <h1 class="post-title" itemprop="name headline">scrapy之爬虫暂停与恢复</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-28T18:55:10+08:00">
-                2019-06-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-05T22:46:35+08:00">
+                2019-09-05
               </time>
             
 
@@ -299,17 +299,21 @@
       
 
       
-        <p>链接的本质就是将多个目标文件拼接到一起形成可执行文件。为了使不同的目标文件之间能够拼接，必须有一定的规则才行，就像协议一样。在链接中，目标文件之前的相互拼接实际上是目标文件之间对地址的引用，即对函数和变量的地址的引用。比如目标文件B用到了目标文件A中的函数<code>foo</code>，就称目标文件A定义了函数<code>foo</code>，目标文件B引用了目标文件A中的函数<code>foo</code>。在链接中，我们将函数和变量统称为符号，函数名或变量名就是符号名。</p>
-<p>整个链接的过程正是基于符号才能够正确完成。链接过程中很关键的一部分就是符号管理，每一个目标文件都会有一个相应的符号表，这个表里记录了目标文件中所用到的所有符号。每个定义的符号有一个对应的值，叫做符号值，对于变量和函数来说，符号值就是他们的地址。</p>
-<p>符号表中的分类：</p>
-<ul>
-<li>定义在本目标文件中的全局符号，可以被其他目标文件引用。</li>
-<li>在本目标文件中引用的全局符号，却没有定义在本目标文件。</li>
-<li>段名，这种符号往往由编译器产生，它的值就是该段的起始地址。</li>
-<li>局部符号，这类符号只在编译单元内部可见。这些局部符号对于链接过程没有作用，链接器往往忽略它们。</li>
-<li>行号信息，即目标文件指令与源代码中代码行的对应关系，它也是可选的。</li>
-</ul>
-<p>对于我们来说，最值得关注的就是全局符号，即上面分类中的第一类和第二类。因为链接过程只关心全局符号相互黏合，局部符号、段名、行号都是次要的，它们对于其他目标文件来说是不可见的，在链接过程中也是无关紧要的。</p>
+        <p>对于爬虫而言，如果能够设置断点，停止后恢复运行可以继续从上次中断的点开始运行，无疑是一个友好的特性，实现原理无非是将中断信息持久化，scrapy是实现这个这个特性的，然鹅在这里踩坑了。</p>
+<p><a href="https://docs.scrapy.org/en/latest/topics/jobs.html" target="_blank" rel="noopener">Scrapy: Jobs pausing and resuming crawls</a></p>
+<p>参考文档戳上面</p>
+<p>按照文档中的操作，只需要在<code>scrapy crawl spider_name -s JOBDIR=job_dir/xxx</code>后面加上设置JOBDIR变量的参数即可，然后发送一个停止的信号即可。</p>
+<p>可是遇到了这样的问题，在发送完一次停止信号之后，程序没停，然后又发送了一次，程序强制被停，重启之后显示如下</p>
+<figure class="highlight plain"><figcaption><span>23:00:22 [scrapy.core.engine] INFO: Spider opened</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2019-09-05 23:00:22 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)</span><br><span class="line">2019-09-05 23:00:22 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023</span><br><span class="line">2019-09-05 23:00:22 [scrapy.dupefilters] DEBUG: Filtered duplicate request: &lt;GET https://www.privateproperty.com.ng/property-for-sale?sortby=listeddesc&gt; (referer: None)</span><br><span class="line">2019-09-05 23:00:22 [scrapy.core.engine] INFO: Closing spider (finished)</span><br></pre></td></tr></table></figure>
+
+<p>显示了一个filtered duplicate request之后就停止退出了，什么鬼？然后在搜索相关的问题，发现给出的都不是想要的答案，最后在stackoverflow上发现得分很低的答案。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If you click Ctrl+C twice (force stop) it won&apos;t be able to be continued. Click Ctrl+C just once and wait.</span><br></pre></td></tr></table></figure>
+
+<p>试着做了，果然发送一个信号后等程序停止了重新恢复后就可以继续运行。</p>
+<p>上面说原理也就是保存断点的信息，对比一下强退和等待退出的目录结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">等待退出</span><br><span class="line">|____requests.queue</span><br><span class="line">| |____active.json</span><br><span class="line">| |____p0</span><br><span class="line">|____requests.seen</span><br><span class="line">|____spider.state</span><br><span class="line"></span><br><span class="line">强制退出</span><br><span class="line">.</span><br><span class="line">|____requests.queue</span><br><span class="line">| |____p0</span><br><span class="line">|____requests.seen</span><br><span class="line">|____spider.state</span><br></pre></td></tr></table></figure>
+
+<p>可见在目录结构上是有差异的。至于根本原因，需要阅读源码之后再给出答案，后续更新。</p>
 
       
     </div>
@@ -334,8 +338,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/27/魔数的由来/" rel="next" title="魔数的由来">
-                <i class="fa fa-chevron-left"></i> 魔数的由来
+              <a href="/2019/07/07/python模拟登录/" rel="next" title="python模拟登录">
+                <i class="fa fa-chevron-left"></i> python模拟登录
               </a>
             
           </div>
@@ -343,10 +347,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/03/php基本语法/" rel="prev" title="php基本语法">
-                php基本语法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
