@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。容器化变得越来越流行是因为容器有以下特性： 灵活：即使很复杂的应用也可以被容器化 轻量：与宿主机共享内核 热更新：应用运行时部署更新和升级 可移植：可以在本地构建，部署到任何地方 可扩展：可以增加并且自动发布容器副本 可堆叠：可以堆叠服务  Images和Containers容器通过运行镜像启动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker-基本概念">
+<meta property="og:url" content="http://threebearsdan.github.io/2019/09/06/docker-基本概念/index.html">
+<meta property="og:site_name" content="一代人终将老去，总有人正年轻。">
+<meta property="og:description" content="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。容器化变得越来越流行是因为容器有以下特性： 灵活：即使很复杂的应用也可以被容器化 轻量：与宿主机共享内核 热更新：应用运行时部署更新和升级 可移植：可以在本地构建，部署到任何地方 可扩展：可以增加并且自动发布容器副本 可堆叠：可以堆叠服务  Images和Containers容器通过运行镜像启动">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-07T15:37:19.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker-基本概念">
+<meta name="twitter:description" content="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。容器化变得越来越流行是因为容器有以下特性： 灵活：即使很复杂的应用也可以被容器化 轻量：与宿主机共享内核 热更新：应用运行时部署更新和升级 可移植：可以在本地构建，部署到任何地方 可扩展：可以增加并且自动发布容器副本 可堆叠：可以堆叠服务  Images和Containers容器通过运行镜像启动">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://threebearsdan.github.io/2019/09/06/docker-基本概念/">
+
+
+
+
+
+  <title>docker-基本概念 | 一代人终将老去，总有人正年轻。</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一代人终将老去，总有人正年轻。</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/09/06/docker-基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cruise">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker-基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T19:28:43+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。"><a href="#docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。" class="headerlink" title="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。"></a><code>docker</code>是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。</h3><h3 id="容器化变得越来越流行是因为容器有以下特性："><a href="#容器化变得越来越流行是因为容器有以下特性：" class="headerlink" title="容器化变得越来越流行是因为容器有以下特性："></a>容器化变得越来越流行是因为容器有以下特性：</h3><ul>
+<li>灵活：即使很复杂的应用也可以被容器化</li>
+<li>轻量：与宿主机共享内核</li>
+<li>热更新：应用运行时部署更新和升级</li>
+<li>可移植：可以在本地构建，部署到任何地方</li>
+<li>可扩展：可以增加并且自动发布容器副本</li>
+<li>可堆叠：可以堆叠服务</li>
+</ul>
+<h3 id="Images和Containers"><a href="#Images和Containers" class="headerlink" title="Images和Containers"></a><code>Images</code>和<code>Containers</code></h3><p>容器通过运行镜像启动。镜像是包含应用运行所需代码，运行时，库，环境变量和配置文件的可执行包。<br>容器是镜像的运行时实例——当执行的时候镜像加载到内存（也就是有状态的镜像或者用户进程）。可以通过<code>docker ps</code>查看正在运行的容器列表，就像在<code>linux</code>中一样。</p>
+<h3 id="Containers和Virtual-machines"><a href="#Containers和Virtual-machines" class="headerlink" title="Containers和Virtual machines"></a><code>Containers</code>和<code>Virtual machines</code></h3><p>容器原生的运行在<code>Linux</code>上，并且和其他容器共享宿主及其的内核。它作为一个独立的运行的进程，不占用其他进程的内存，因此很轻量级。</p>
+<p>相反，虚拟机运行一个完整的操作系统通过<code>hypervisor</code>虚拟访问主机资源。一般来说，虚拟机提供了多于大部分应用所需的资源环境。</p>
+<h3 id="新的开发环境"><a href="#新的开发环境" class="headerlink" title="新的开发环境"></a>新的开发环境</h3><p>过去，如果你写一个新的<code>Python</code>应用，第一步是在你的机器上安装<code>Python</code>运行时。并且，创建的环境是应用运行是所期望的，同时也尽可能于正式环境一致。</p>
+<p>使用<code>Docker</code>，只需要拿一个可移植的<code>Python</code>运行时作为镜像，不需要安装。然后，构建一个包含基础<code>Python</code>镜像和应用的代码，确保应用的依赖，运行时都在一起。</p>
+<p>这些可移植的镜像被<code>DockerFile</code>定义。</p>
+<h3 id="使用Dockerfile定义一个容器"><a href="#使用Dockerfile定义一个容器" class="headerlink" title="使用Dockerfile定义一个容器"></a>使用<code>Dockerfile</code>定义一个容器</h3><p><code>Dockerfile</code>定义了你容器中的环境是怎么样的。访问类似网络接口和硬盘驱动被虚拟化进这个环境，这个环境独立于系统的其他部分，所以需要映射端口到外面的世界，并且特别注意你想写进这个环境中的文件。做了这些之后，从<code>Makefile</code>文件中构建的应用无论在什么地方执行都表现出一样的行为。</p>
+<h4 id="Dockfile"><a href="#Dockfile" class="headerlink" title="Dockfile"></a><code>Dockfile</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># Use an official Python runtime as a parent image</span><br><span class="line">FROM python:2.7-slim</span><br><span class="line"></span><br><span class="line"># Set the working directory to /app</span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"># Copy the current directory contents into the container at /app</span><br><span class="line">COPY . /app</span><br><span class="line"></span><br><span class="line"># Install any needed packages specified in requirements.txt</span><br><span class="line">RUN pip install --trusted-host pypi.python.org -r requirements.txt</span><br><span class="line"></span><br><span class="line"># Make port 80 available to the world outside this container</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line"># Define environment variable</span><br><span class="line">ENV NAME World</span><br><span class="line"></span><br><span class="line"># Run app.py when the container launches</span><br><span class="line">CMD [&quot;python&quot;, &quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="app-py"><a href="#app-py" class="headerlink" title="app.py"></a><code>app.py</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">from redis import Redis, RedisError</span><br><span class="line">import os</span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line"># Connect to Redis</span><br><span class="line">redis = Redis(host=&quot;redis&quot;, db=0, socket_connect_timeout=2, socket_timeout=2)</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def hello():</span><br><span class="line">    try:</span><br><span class="line">        visits = redis.incr(&quot;counter&quot;)</span><br><span class="line">    except RedisError:</span><br><span class="line">        visits = &quot;&lt;i&gt;cannot connect to Redis, counter disabled&lt;/i&gt;&quot;</span><br><span class="line"></span><br><span class="line">    html = &quot;&lt;h3&gt;Hello &#123;name&#125;!&lt;/h3&gt;&quot; \</span><br><span class="line">           &quot;&lt;b&gt;Hostname:&lt;/b&gt; &#123;hostname&#125;&lt;br/&gt;&quot; \</span><br><span class="line">           &quot;&lt;b&gt;Visits:&lt;/b&gt; &#123;visits&#125;&quot;</span><br><span class="line">    return html.format(name=os.getenv(&quot;NAME&quot;, &quot;world&quot;), hostname=socket.gethostname(), visits=visits)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&apos;0.0.0.0&apos;, port=80)</span><br></pre></td></tr></table></figure>
+
+<h4 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt"></a><code>requirements.txt</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Flask</span><br><span class="line">Redis</span><br></pre></td></tr></table></figure>
+
+<h4 id="根目录结构如下："><a href="#根目录结构如下：" class="headerlink" title="根目录结构如下："></a>根目录结构如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── app.py</span><br><span class="line">├── Dockerfile</span><br><span class="line">└── requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="构建app"><a href="#构建app" class="headerlink" title="构建app"></a>构建<code>app</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build --tag=friendlyhello .</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行app"><a href="#运行app" class="headerlink" title="运行app"></a>运行<code>app</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 4000:80 friendlyhello</span><br></pre></td></tr></table></figure>
+
+<h4 id="以daemon模式运行"><a href="#以daemon模式运行" class="headerlink" title="以daemon模式运行"></a>以<code>daemon</code>模式运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 4000:80 friendlyhello</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看container信息"><a href="#查看container信息" class="headerlink" title="查看container信息"></a>查看<code>container</code>信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop container-ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="container相关命令"><a href="#container相关命令" class="headerlink" title="container相关命令"></a><code>container</code>相关命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker build -t friendlyhello .  # Create image using this directory&apos;s Dockerfile</span><br><span class="line">docker run -p 4000:80 friendlyhello  # Run &quot;friendlyhello&quot; mapping port 4000 to 80</span><br><span class="line">docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode</span><br><span class="line">docker container ls                                # List all running containers</span><br><span class="line">docker container ls -a             # List all containers, even those not running</span><br><span class="line">docker container stop &lt;hash&gt;           # Gracefully stop the specified container</span><br><span class="line">docker container kill &lt;hash&gt;         # Force shutdown of the specified container</span><br><span class="line">docker container rm &lt;hash&gt;        # Remove specified container from this machine</span><br><span class="line">docker container rm $(docker container ls -a -q)         # Remove all containers</span><br><span class="line">docker image ls -a                             # List all images on this machine</span><br><span class="line">docker image rm &lt;image id&gt;            # Remove specified image from this machine</span><br><span class="line">docker image rm $(docker image ls -a -q)   # Remove all images from this machine</span><br><span class="line">docker login             # Log in this CLI session using your Docker credentials</span><br><span class="line">docker tag &lt;image&gt; username/repository:tag  # Tag &lt;image&gt; for upload to registry</span><br><span class="line">docker push username/repository:tag            # Upload tagged image to registry</span><br><span class="line">docker run username/repository:tag                   # Run image from a registry</span><br></pre></td></tr></table></figure>
+
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><p>在分布式应用中，应用的不同部分被成为<code>services</code>。例如，想象一个<code>video</code>分享网站，它可能包含一个存储应用数据到数据库的一个服务，一个在后后台转码用户上传的数据，一个服务在前台等等。</p>
+<p><code>Services</code>就像成产环境中的<code>containers</code>。一个<code>service</code>仅仅运行一个<code>image</code>，但是它决定<code>image</code>如何运行——哪些端口可以使用，服务实现高可用所需要的副本个数等等。扩展一个服务改变运行那个软件所运行容器实例的个数，在进程中赋予更多计算资源给服务。</p>
+<p>幸运的是这很容易去定义，执行和扩展<code>services</code>通过<code>Docker</code>平台–仅仅写一个<code>docker-compose.yml</code>文件。</p>
+<h4 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    # replace username/repo:tag with your name and image details</span><br><span class="line">    image: username/repo:tag</span><br><span class="line">    deploy:</span><br><span class="line">      replicas: 5</span><br><span class="line">      resources:</span><br><span class="line">        limits:</span><br><span class="line">          cpus: &quot;0.1&quot;</span><br><span class="line">          memory: 50M</span><br><span class="line">      restart_policy:</span><br><span class="line">        condition: on-failure</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;4000:80&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - webnet</span><br><span class="line">networks:</span><br><span class="line">  webnet:</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/05/scrapy之爬虫暂停与恢复/" rel="next" title="scrapy之爬虫暂停与恢复">
+                <i class="fa fa-chevron-left"></i> scrapy之爬虫暂停与恢复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Cruise</p>
+              <p class="site-description motion-element" itemprop="description">记录岁月。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。"><span class="nav-number">1.</span> <span class="nav-text">docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器化变得越来越流行是因为容器有以下特性："><span class="nav-number">2.</span> <span class="nav-text">容器化变得越来越流行是因为容器有以下特性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Images和Containers"><span class="nav-number">3.</span> <span class="nav-text">Images和Containers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Containers和Virtual-machines"><span class="nav-number">4.</span> <span class="nav-text">Containers和Virtual machines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新的开发环境"><span class="nav-number">5.</span> <span class="nav-text">新的开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Dockerfile定义一个容器"><span class="nav-number">6.</span> <span class="nav-text">使用Dockerfile定义一个容器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dockfile"><span class="nav-number">6.1.</span> <span class="nav-text">Dockfile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#app-py"><span class="nav-number">6.2.</span> <span class="nav-text">app.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#requirements-txt"><span class="nav-number">6.3.</span> <span class="nav-text">requirements.txt</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根目录结构如下："><span class="nav-number">6.4.</span> <span class="nav-text">根目录结构如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建app"><span class="nav-number">6.5.</span> <span class="nav-text">构建app</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行app"><span class="nav-number">6.6.</span> <span class="nav-text">运行app</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以daemon模式运行"><span class="nav-number">6.7.</span> <span class="nav-text">以daemon模式运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看container信息"><span class="nav-number">6.8.</span> <span class="nav-text">查看container信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止容器"><span class="nav-number">6.9.</span> <span class="nav-text">停止容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#container相关命令"><span class="nav-number">6.10.</span> <span class="nav-text">container相关命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Services"><span class="nav-number">7.</span> <span class="nav-text">Services</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-compose-yml"><span class="nav-number">7.1.</span> <span class="nav-text">docker-compose.yml</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cruise</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

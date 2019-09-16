@@ -232,6 +232,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/09/06/docker-基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cruise">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/06/docker-基本概念/" itemprop="url">docker-基本概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T19:28:43+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。"><a href="#docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。" class="headerlink" title="docker是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。"></a><code>docker</code>是一个让开发者或管理员通过容器来开发，部署，运行应用的平台。使用容器来部署应用被称为容器化。</h3><h3 id="容器化变得越来越流行是因为容器有以下特性："><a href="#容器化变得越来越流行是因为容器有以下特性：" class="headerlink" title="容器化变得越来越流行是因为容器有以下特性："></a>容器化变得越来越流行是因为容器有以下特性：</h3><ul>
+<li>灵活：即使很复杂的应用也可以被容器化</li>
+<li>轻量：与宿主机共享内核</li>
+<li>热更新：应用运行时部署更新和升级</li>
+<li>可移植：可以在本地构建，部署到任何地方</li>
+<li>可扩展：可以增加并且自动发布容器副本</li>
+<li>可堆叠：可以堆叠服务</li>
+</ul>
+<h3 id="Images和Containers"><a href="#Images和Containers" class="headerlink" title="Images和Containers"></a><code>Images</code>和<code>Containers</code></h3><p>容器通过运行镜像启动。镜像是包含应用运行所需代码，运行时，库，环境变量和配置文件的可执行包。<br>容器是镜像的运行时实例——当执行的时候镜像加载到内存（也就是有状态的镜像或者用户进程）。可以通过<code>docker ps</code>查看正在运行的容器列表，就像在<code>linux</code>中一样。</p>
+<h3 id="Containers和Virtual-machines"><a href="#Containers和Virtual-machines" class="headerlink" title="Containers和Virtual machines"></a><code>Containers</code>和<code>Virtual machines</code></h3><p>容器原生的运行在<code>Linux</code>上，并且和其他容器共享宿主及其的内核。它作为一个独立的运行的进程，不占用其他进程的内存，因此很轻量级。</p>
+<p>相反，虚拟机运行一个完整的操作系统通过<code>hypervisor</code>虚拟访问主机资源。一般来说，虚拟机提供了多于大部分应用所需的资源环境。</p>
+<h3 id="新的开发环境"><a href="#新的开发环境" class="headerlink" title="新的开发环境"></a>新的开发环境</h3><p>过去，如果你写一个新的<code>Python</code>应用，第一步是在你的机器上安装<code>Python</code>运行时。并且，创建的环境是应用运行是所期望的，同时也尽可能于正式环境一致。</p>
+<p>使用<code>Docker</code>，只需要拿一个可移植的<code>Python</code>运行时作为镜像，不需要安装。然后，构建一个包含基础<code>Python</code>镜像和应用的代码，确保应用的依赖，运行时都在一起。</p>
+<p>这些可移植的镜像被<code>DockerFile</code>定义。</p>
+<h3 id="使用Dockerfile定义一个容器"><a href="#使用Dockerfile定义一个容器" class="headerlink" title="使用Dockerfile定义一个容器"></a>使用<code>Dockerfile</code>定义一个容器</h3><p><code>Dockerfile</code>定义了你容器中的环境是怎么样的。访问类似网络接口和硬盘驱动被虚拟化进这个环境，这个环境独立于系统的其他部分，所以需要映射端口到外面的世界，并且特别注意你想写进这个环境中的文件。做了这些之后，从<code>Makefile</code>文件中构建的应用无论在什么地方执行都表现出一样的行为。</p>
+<h4 id="Dockfile"><a href="#Dockfile" class="headerlink" title="Dockfile"></a><code>Dockfile</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># Use an official Python runtime as a parent image</span><br><span class="line">FROM python:2.7-slim</span><br><span class="line"></span><br><span class="line"># Set the working directory to /app</span><br><span class="line">WORKDIR /app</span><br><span class="line"></span><br><span class="line"># Copy the current directory contents into the container at /app</span><br><span class="line">COPY . /app</span><br><span class="line"></span><br><span class="line"># Install any needed packages specified in requirements.txt</span><br><span class="line">RUN pip install --trusted-host pypi.python.org -r requirements.txt</span><br><span class="line"></span><br><span class="line"># Make port 80 available to the world outside this container</span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line"># Define environment variable</span><br><span class="line">ENV NAME World</span><br><span class="line"></span><br><span class="line"># Run app.py when the container launches</span><br><span class="line">CMD [&quot;python&quot;, &quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+
+<h4 id="app-py"><a href="#app-py" class="headerlink" title="app.py"></a><code>app.py</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">from redis import Redis, RedisError</span><br><span class="line">import os</span><br><span class="line">import socket</span><br><span class="line"></span><br><span class="line"># Connect to Redis</span><br><span class="line">redis = Redis(host=&quot;redis&quot;, db=0, socket_connect_timeout=2, socket_timeout=2)</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&quot;/&quot;)</span><br><span class="line">def hello():</span><br><span class="line">    try:</span><br><span class="line">        visits = redis.incr(&quot;counter&quot;)</span><br><span class="line">    except RedisError:</span><br><span class="line">        visits = &quot;&lt;i&gt;cannot connect to Redis, counter disabled&lt;/i&gt;&quot;</span><br><span class="line"></span><br><span class="line">    html = &quot;&lt;h3&gt;Hello &#123;name&#125;!&lt;/h3&gt;&quot; \</span><br><span class="line">           &quot;&lt;b&gt;Hostname:&lt;/b&gt; &#123;hostname&#125;&lt;br/&gt;&quot; \</span><br><span class="line">           &quot;&lt;b&gt;Visits:&lt;/b&gt; &#123;visits&#125;&quot;</span><br><span class="line">    return html.format(name=os.getenv(&quot;NAME&quot;, &quot;world&quot;), hostname=socket.gethostname(), visits=visits)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&apos;0.0.0.0&apos;, port=80)</span><br></pre></td></tr></table></figure>
+
+<h4 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt"></a><code>requirements.txt</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Flask</span><br><span class="line">Redis</span><br></pre></td></tr></table></figure>
+
+<h4 id="根目录结构如下："><a href="#根目录结构如下：" class="headerlink" title="根目录结构如下："></a>根目录结构如下：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── app.py</span><br><span class="line">├── Dockerfile</span><br><span class="line">└── requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="构建app"><a href="#构建app" class="headerlink" title="构建app"></a>构建<code>app</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build --tag=friendlyhello .</span><br></pre></td></tr></table></figure>
+
+<h4 id="运行app"><a href="#运行app" class="headerlink" title="运行app"></a>运行<code>app</code></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 4000:80 friendlyhello</span><br></pre></td></tr></table></figure>
+
+<h4 id="以daemon模式运行"><a href="#以daemon模式运行" class="headerlink" title="以daemon模式运行"></a>以<code>daemon</code>模式运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 4000:80 friendlyhello</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看container信息"><a href="#查看container信息" class="headerlink" title="查看container信息"></a>查看<code>container</code>信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container ls</span><br></pre></td></tr></table></figure>
+
+<h4 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop container-ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="container相关命令"><a href="#container相关命令" class="headerlink" title="container相关命令"></a><code>container</code>相关命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">docker build -t friendlyhello .  # Create image using this directory&apos;s Dockerfile</span><br><span class="line">docker run -p 4000:80 friendlyhello  # Run &quot;friendlyhello&quot; mapping port 4000 to 80</span><br><span class="line">docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode</span><br><span class="line">docker container ls                                # List all running containers</span><br><span class="line">docker container ls -a             # List all containers, even those not running</span><br><span class="line">docker container stop &lt;hash&gt;           # Gracefully stop the specified container</span><br><span class="line">docker container kill &lt;hash&gt;         # Force shutdown of the specified container</span><br><span class="line">docker container rm &lt;hash&gt;        # Remove specified container from this machine</span><br><span class="line">docker container rm $(docker container ls -a -q)         # Remove all containers</span><br><span class="line">docker image ls -a                             # List all images on this machine</span><br><span class="line">docker image rm &lt;image id&gt;            # Remove specified image from this machine</span><br><span class="line">docker image rm $(docker image ls -a -q)   # Remove all images from this machine</span><br><span class="line">docker login             # Log in this CLI session using your Docker credentials</span><br><span class="line">docker tag &lt;image&gt; username/repository:tag  # Tag &lt;image&gt; for upload to registry</span><br><span class="line">docker push username/repository:tag            # Upload tagged image to registry</span><br><span class="line">docker run username/repository:tag                   # Run image from a registry</span><br></pre></td></tr></table></figure>
+
+<h3 id="Services"><a href="#Services" class="headerlink" title="Services"></a>Services</h3><p>在分布式应用中，应用的不同部分被成为<code>services</code>。例如，想象一个<code>video</code>分享网站，它可能包含一个存储应用数据到数据库的一个服务，一个在后后台转码用户上传的数据，一个服务在前台等等。</p>
+<p><code>Services</code>就像成产环境中的<code>containers</code>。一个<code>service</code>仅仅运行一个<code>image</code>，但是它决定<code>image</code>如何运行——哪些端口可以使用，服务实现高可用所需要的副本个数等等。扩展一个服务改变运行那个软件所运行容器实例的个数，在进程中赋予更多计算资源给服务。</p>
+<p>幸运的是这很容易去定义，执行和扩展<code>services</code>通过<code>Docker</code>平台–仅仅写一个<code>docker-compose.yml</code>文件。</p>
+<h4 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    # replace username/repo:tag with your name and image details</span><br><span class="line">    image: username/repo:tag</span><br><span class="line">    deploy:</span><br><span class="line">      replicas: 5</span><br><span class="line">      resources:</span><br><span class="line">        limits:</span><br><span class="line">          cpus: &quot;0.1&quot;</span><br><span class="line">          memory: 50M</span><br><span class="line">      restart_policy:</span><br><span class="line">        condition: on-failure</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;4000:80&quot;</span><br><span class="line">    networks:</span><br><span class="line">      - webnet</span><br><span class="line">networks:</span><br><span class="line">  webnet:</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/09/05/scrapy之爬虫暂停与恢复/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1473,136 +1632,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://threebearsdan.github.io/2019/06/26/代码段和数据段为什么分开存放？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Cruise">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一代人终将老去，总有人正年轻。">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/26/代码段和数据段为什么分开存放？/" itemprop="url">代码段和数据段为什么分开存放？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T16:43:51+08:00">
-                2019-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>当程序被装载后，数据和指令分别被映射到两个虚存区域。数据区域对进程来说是可读写的，而指令区域对进程来说是只读的，所以这两个虚存区域的权限可以被分别设置成可读写和只读。这样可以防止程序的指令被有意或无意的改写。</p>
-</li>
-<li><p>对于现代的CPU来说，它们有着极为强大的缓存体系。由于缓存在现代计算机中的地位非常重要，所以必须尽量提高缓存的命中率。指令区和数据区的分离有利于提高程序的局部性。现代CPU的缓存一般都被设计成数据缓存和指令缓存你分离，所以程序的指令和数据被分开存对CPU的缓存命中率提高有好处。</p>
-</li>
-<li><p>最重要的原因就是当系统中运行多个该程序的副本时，它们的指令都是一样的，所以内存中只需要保存一份改程序的指令部分。对于指令这种只读的区域来说时这样，对于其他的只读数据也一样，比如很多程序里面带有的图标，图片，文本等资源也是属于可共享的。当然每个副本进程的数据区域时不一样的。它们时进程私有的。不要小看这个共享指令的概念，它在现代操作系统里面占了极其重要的地位，特别时在有动态链接库的系统中，可以节省大量的内存。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1646,7 +1682,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
